@@ -30,7 +30,7 @@
                 " * * ",
                 "   * ",
                 "   * ",
-                "   * "
+                "  ***"
             ],
             "2": [
                 " *** ",
@@ -82,11 +82,11 @@
                 " *** "
             ],
             "9": [
-                "*****",
+                " *** ",
                 "*   *",
-                "*****",
+                " ****",
                 "    *",
-                "*****"
+                " *** "
             ]
 
         }
@@ -95,9 +95,8 @@
             let month = Number(prompt("Введите месяц рождения (1-12):"));
             let year = Number(prompt("Введите год рождения:"));
             let dateStr = String(day).padStart(2, "0") + "." + String(month).padStart(2, "0") + "." + String(year);
-            console.log(dateStr);
             for (let line = 0; line < 5; line++) {
-                let outputLine = String(line) + "   ";
+                let outputLine = "";
                 for (let char of dateStr) {
                     if (digits[char]) {
                         outputLine += digits[char][line] + " ";
