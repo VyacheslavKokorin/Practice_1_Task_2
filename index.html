@@ -5,21 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Дни рождения</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .center-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <button onclick="printBD()">Вывод в консоль даты</button><br>
-    <button onclick="printWD()">Вывод в консоль дня недели</button><br>
-    <button onclick="printAge()">Возраст?</button><br>
-    <button onclick="printLY()">Високосный год?</button>
+    <div class="center-box">
+        <button onclick="printBD()">Вывод в консоль даты</button>
+        <button onclick="printWD()">День недели</button>
+        <button onclick="printAge()">Возраст</button>
+        <button onclick="printLY()">Високосный год</button>
+    </div>
     <script>
         let day = Number(prompt("Введите день рождения (1-31):"));
         let month = Number(prompt("Введите месяц рождения (1-12):"));
         let year = Number(prompt("Введите год рождения:"));
         function printLY() {
             let isLeapYear = (year % 4 === 0) && (year % 100 !== 0 || year % 400 === 0);
-            let result = isLeapYear ? "Високосный год" : "Не високосный год";
-            console.log(result);
+            alert(isLeapYear ? "Это високосный год" : "Это не високосный год");
         }
         function printAge() {
             const today = new Date();
@@ -28,14 +45,14 @@
             if (today < birthdayThisYear) {
                 age -= 1;
             }
-            console.log(age);
+            alert("Ваш возраст " + age + ((age % 10 === 1 && age !== 11) ? " год" : (age % 10 >= 2 && age % 10 <= 4 && (age < 10 || age > 20)) ? " года" : " лет"));
         }
         function printWD() {
-            const weekdays = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+            const weekdays = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"];
             let date = new Date(year, month - 1, day);
             let weekdayIndex = date.getDay();
             let weekdayName = weekdays[weekdayIndex];
-            console.log(weekdayName);
+            alert("День недели - " + weekdayName);
         }
         function printBD() {
             let dateStr = String(day).padStart(2, "0") + "." + String(month).padStart(2, "0") + "." + String(year);
