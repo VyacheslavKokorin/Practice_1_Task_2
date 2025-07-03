@@ -31,15 +31,79 @@
         <button onclick="printLY()">Високосный год</button>
     </div>
     <script>
-        let day = Number(prompt("Введите день рождения (1-31):"));
-        let month = Number(prompt("Введите месяц рождения (1-12):"));
-        let year = Number(prompt("Введите год рождения:"));
+        let day;
+        let month;
+        let year;
+        const today = new Date();
+        while (getValidDate()) {
+            alert("Такой даты не существует. Попробуйте снова.");
+        }
+        function getValidDate() {
+            let cont = true;
+            while (cont) {
+                cont = getDay();
+            }
+            cont = true;
+            while (cont) {
+                cont = getMonth();
+            }
+            cont = true;
+            while (cont) {
+                cont = getYear();
+            }
+            const testDate = new Date(year, month - 1, day);
+            return !(testDate.getFullYear() === year && testDate.getMonth() === month - 1 && testDate.getDate() === day);
+        }
+        function getDay() {
+            day = Number(prompt("Введите день рождения (1-31):"));
+            if (isNaN(day)) {
+                alert("Вы не ввели число.");
+                return true;
+            }
+            if (day < 1) {
+                alert("Вы ввели число меньше 1. Таких дат не бывает!");
+                return true;
+            }
+            if (day > 31) {
+                alert("Вы ввели число больше 31. Таких дат не бывает!");
+                return true;
+            }
+            return false;
+        }
+        function getMonth() {
+            month = Number(prompt("Введите месяц рождения (1-12):"));
+            if (isNaN(month)) {
+                alert("Вы не ввели число.");
+                return true;
+            }
+            if (month < 1) {
+                alert("Вы ввели число меньше 1. Таких месяцев не бывает!");
+                return true;
+            }
+            if (month > 12) {
+                alert("Вы ввели число больше 12. Таких месяцев не бывает!");
+                return true;
+            }
+            return false;
+        }
+        function getYear() {
+            year = Number(prompt("Введите год рождения:"));
+            if (isNaN(year)) {
+                alert("Вы не ввели число.");
+                return true;
+            }
+            if (year > today.getFullYear()) {
+                alert("Вы ввели число больше " + today.getFullYear() + ". Вы не могли родиться в будущем!");
+
+                return true;
+            }
+            return false;
+        }
         function printLY() {
             let isLeapYear = (year % 4 === 0) && (year % 100 !== 0 || year % 400 === 0);
             alert(isLeapYear ? "Это високосный год" : "Это не високосный год");
         }
         function printAge() {
-            const today = new Date();
             let age = today.getFullYear() - year;
             const birthdayThisYear = new Date(today.getFullYear(), month - 1, day);
             if (today < birthdayThisYear) {
