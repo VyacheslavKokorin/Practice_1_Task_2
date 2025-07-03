@@ -10,11 +10,101 @@
 <body>
     <button onclick="checkBD()">Проверить</button>
     <script>
+        const digits = {
+            ".": [
+                "     ",
+                "     ",
+                "     ",
+                "     ",
+                "  *  "
+            ],
+            "0": [
+                " *** ",
+                "*   *",
+                "*   *",
+                "*   *",
+                " *** "
+            ],
+            "1": [
+                "   * ",
+                " * * ",
+                "   * ",
+                "   * ",
+                "   * "
+            ],
+            "2": [
+                " *** ",
+                "*   *",
+                "   * ",
+                "  *  ",
+                "*****"
+            ],
+            "3": [
+                " *** ",
+                "    *",
+                " *** ",
+                "    *",
+                " *** "
+            ],
+            "4": [
+                "   * ",
+                "  ** ",
+                " * * ",
+                "*****",
+                "   * "
+            ],
+            "5": [
+                "*****",
+                "*    ",
+                "**** ",
+                "    *",
+                "**** "
+            ],
+            "6": [
+                " *** ",
+                "*    ",
+                "**** ",
+                "*   *",
+                " *** "
+            ],
+            "7": [
+                "*****",
+                "    *",
+                "   * ",
+                "  *  ",
+                " *   "
+            ],
+            "8": [
+                " *** ",
+                "*   *",
+                " *** ",
+                "*   *",
+                " *** "
+            ],
+            "9": [
+                "*****",
+                "*   *",
+                "*****",
+                "    *",
+                "*****"
+            ]
+
+        }
         function checkBD() {
             let day = Number(prompt("Введите день рождения (1-31):"));
             let month = Number(prompt("Введите месяц рождения (1-12):"));
             let year = Number(prompt("Введите год рождения:"));
-            console.log(day, month, year);
+            let dateStr = String(day).padStart(2, "0") + "." + String(month).padStart(2, "0") + "." + String(year);
+            console.log(dateStr);
+            for (let line = 0; line < 5; line++) {
+                let outputLine = String(line) + "   ";
+                for (let char of dateStr) {
+                    if (digits[char]) {
+                        outputLine += digits[char][line] + " ";
+                    }
+                }
+                console.log(outputLine);
+            }
         }
     </script>
 </body>
