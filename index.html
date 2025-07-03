@@ -10,12 +10,17 @@
 <body>
     <button onclick="printBD()">Вывод в консоль даты</button><br>
     <button onclick="printWD()">Вывод в консоль дня недели</button><br>
-    <button onclick="printAge()">Возраст?</button>
+    <button onclick="printAge()">Возраст?</button><br>
+    <button onclick="printLY()">Високосный год?</button>
     <script>
         let day = Number(prompt("Введите день рождения (1-31):"));
         let month = Number(prompt("Введите месяц рождения (1-12):"));
         let year = Number(prompt("Введите год рождения:"));
-
+        function printLY() {
+            let isLeapYear = (year % 4 === 0) && (year % 100 !== 0 || year % 400 === 0);
+            let result = isLeapYear ? "Високосный год" : "Не високосный год";
+            console.log(result);
+        }
         function printAge() {
             const today = new Date();
             let age = today.getFullYear() - year;
