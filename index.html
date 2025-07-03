@@ -8,8 +8,42 @@
 </head>
 
 <body>
-    <button onclick="checkBD()">Проверить</button>
+    <button onclick="printBD()">Вывод в консоль даты</button><br>
+    <button onclick="printWD()">Вывод в консоль дня недели</button><br>
+    <button onclick="printAge()">Возраст?</button>
     <script>
+        let day = Number(prompt("Введите день рождения (1-31):"));
+        let month = Number(prompt("Введите месяц рождения (1-12):"));
+        let year = Number(prompt("Введите год рождения:"));
+
+        function printAge() {
+            const today = new Date();
+            let age = today.getFullYear() - year;
+            const birthdayThisYear = new Date(today.getFullYear(), month - 1, day);
+            if (today < birthdayThisYear) {
+                age -= 1;
+            }
+            console.log(age);
+        }
+        function printWD() {
+            const weekdays = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+            let date = new Date(year, month - 1, day);
+            let weekdayIndex = date.getDay();
+            let weekdayName = weekdays[weekdayIndex];
+            console.log(weekdayName);
+        }
+        function printBD() {
+            let dateStr = String(day).padStart(2, "0") + "." + String(month).padStart(2, "0") + "." + String(year);
+            for (let line = 0; line < 5; line++) {
+                let outputLine = "";
+                for (let char of dateStr) {
+                    if (digits[char]) {
+                        outputLine += digits[char][line] + " ";
+                    }
+                }
+                console.log(outputLine);
+            }
+        }
         const digits = {
             ".": [
                 "     ",
@@ -88,22 +122,6 @@
                 "    *",
                 " *** "
             ]
-
-        }
-        function checkBD() {
-            let day = Number(prompt("Введите день рождения (1-31):"));
-            let month = Number(prompt("Введите месяц рождения (1-12):"));
-            let year = Number(prompt("Введите год рождения:"));
-            let dateStr = String(day).padStart(2, "0") + "." + String(month).padStart(2, "0") + "." + String(year);
-            for (let line = 0; line < 5; line++) {
-                let outputLine = "";
-                for (let char of dateStr) {
-                    if (digits[char]) {
-                        outputLine += digits[char][line] + " ";
-                    }
-                }
-                console.log(outputLine);
-            }
         }
     </script>
 </body>
